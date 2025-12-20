@@ -1,0 +1,5 @@
+{
+  "name": "AI Quiz Generator",
+  "description": "An intelligent quiz generation system to automatically create multiple-choice quizzes using uploaded content or user-provided topics, powered by the Gemini API.",
+  "requestFramePermissions": []
+}

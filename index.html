@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AutoQuizzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                DEFAULT: '#3b82f6',
+                hover: '#2563eb',
+                light: '#6b8f71', // Olive green for light mode
+                'light-hover': '#5a7a60',
+              },
+              secondary: {
+                DEFAULT: '#6d28d9',
+                light: '#9f7aea', // Lavender
+              },
+              danger: {
+                DEFAULT: '#ef4444',
+                hover: '#dc2626',
+                surface: '#3f1a1a',
+                'light-surface': '#fee2e2',
+              },
+              background: {
+                DEFAULT: '#0f172a',
+                light: '#ffffff',
+              },
+              surface: {
+                DEFAULT: '#1e293b',
+                light: '#f8faf9',
+                hover: '#e8f5e9',
+              },
+              'surface-light': {
+                DEFAULT: '#334155',
+                light: '#e8f5e9',
+              },
+              border: {
+                DEFAULT: '#475569',
+                light: '#c5d5c5',
+              },
+              text: {
+                DEFAULT: '#f1f5f9',
+                muted: '#94a3b8',
+                light: '#1a202c',
+                'light-muted': '#4a5568',
+              },
+              easy: {
+                DEFAULT: 'rgba(34, 197, 94, 0.1)',
+                light: 'rgba(34, 197, 94, 0.15)',
+              },
+              'easy-text': {
+                DEFAULT: '#4ade80',
+                light: '#22c55e',
+              },
+              medium: {
+                DEFAULT: 'rgba(234, 179, 8, 0.1)',
+                light: 'rgba(234, 179, 8, 0.15)',
+              },
+              'medium-text': {
+                DEFAULT: '#facc15',
+                light: '#eab308',
+              },
+              hard: {
+                DEFAULT: 'rgba(239, 68, 68, 0.1)',
+                light: 'rgba(239, 68, 68, 0.15)',
+              },
+              'hard-text': {
+                DEFAULT: '#f87171',
+                light: '#ef4444',
+              },
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'slide-up': 'slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'slide-in-right': 'slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'scale-in': 'scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards',
+              'bounce-subtle': 'bounceSubtle 1s ease-in-out',
+              'blob': 'blob 7s infinite',
+              'gradient': 'gradient 15s ease infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { transform: 'translateY(30px)', opacity: '0' },
+                '100%': { transform: 'translateY(0)', opacity: '1' },
+              },
+              slideInRight: {
+                '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              scaleIn: {
+                '0%': { transform: 'scale(0.9)', opacity: '0' },
+                '100%': { transform: 'scale(1)', opacity: '1' },
+              },
+              bounceSubtle: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              gradient: {
+                '0%, 100%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' },
+              },
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      [data-theme="light"] {
+        --bg-primary: #ffffff;
+        --bg-surface: #f8faf9;
+        --text-primary: #1a202c;
+        --text-muted: #4a5568;
+      }
+      [data-theme="dark"] {
+        --bg-primary: #0f172a;
+        --bg-surface: #1e293b;
+        --text-primary: #f1f5f9;
+        --text-muted: #94a3b8;
+      }
+      
+      /* Smooth transitions for theme changes */
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+      
+      /* Remove transition from animations and transforms */
+      *[class*="animate-"],
+      *[class*="transform"] {
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      /* Animation delays for blob effect */
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+
+      /* Gradient animation background size */
+      .animate-gradient {
+        background-size: 200% 200%;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.7.2/mammoth.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.21.0",
+    "jspdf": "https://esm.sh/jspdf@2.5.1",
+    "pdfjs-dist": "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.min.mjs",
+    "@xenova/transformers": "https://aistudiocdn.com/@xenova/transformers@^2.17.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="font-sans">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
